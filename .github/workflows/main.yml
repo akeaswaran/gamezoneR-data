@@ -20,7 +20,7 @@ jobs:
               r-version: ${{ matrix.r-version }}
           - name: Install base dependencies
             run: |
-              Rscript -e 'install.packages(c("devtools","glue","optparse"))
+              Rscript -e 'install.packages(c("devtools","glue","optparse"))'
               Rscript -e 'devtools::install_github(repo = "JackLich10/gamezoneR")'
           - name: Pull data and update files
             run: Rscript ./update.R --season 2021-22 --update_schedule TRUE --postseason FALSE --update_pbp TRUE
