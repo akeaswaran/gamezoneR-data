@@ -18,7 +18,7 @@ jobs:
               Rscript -e 'install.packages(c("remotes","glue","optparse"))'
               Rscript -e 'remotes::install_github(repo = "JackLich10/gamezoneR")'
             env:
-              - GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+              GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
           - name: Pull data and update files
             run: Rscript ./update.R --season 2021-22 --update_schedule TRUE --postseason FALSE --update_pbp TRUE
           - name: Push updated files
