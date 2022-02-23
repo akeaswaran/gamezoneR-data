@@ -1,4 +1,6 @@
 ### Update master schedule/play-by-play and push to GitHub repo
+devtools::install_github(repo = "JackLich10/gamezoneR")
+install.packages(c("glue","optparse"))
 suppressMessages(suppressWarnings(library(gamezoneR)))
 suppressMessages(suppressWarnings(library(glue)))
 suppressMessages(suppressWarnings(library(optparse)))
