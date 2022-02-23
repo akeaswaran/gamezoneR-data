@@ -6,22 +6,19 @@ on:
 
 jobs:
     reporter:
-        runs-on: macos-10.15
-        strategy:
-          matrix:
-            r-version: [4.0.2]
+        runs-on: ubuntu-latest
         name: Updating GameZone data
         steps:
-          - name: Checkout
-            uses: actions/checkout@v2
-          - name: Set up R ${{ matrix.r-version }}
-            uses: r-lib/actions/setup-R@v1 # for macos
+          - uses: actions/checkout@v2
+          - uses: r-lib/actions/setup-r@v1
             with:
               r-version: ${{ matrix.r-version }}
           - name: Install base dependencies
             run: |
-              Rscript -e 'install.packages(c("devtools","glue","optparse"))'
-              Rscript -e 'devtools::install_github(repo = "JackLich10/gamezoneR")'
+              Rscript -e 'install.packages(c("remotes","glue","optparse"))'
+              Rscript -e 'remotes::install_github(repo = "JackLich10/gamezoneR")'
+            env:
+              - GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
           - name: Pull data and update files
             run: Rscript ./update.R --season 2021-22 --update_schedule TRUE --postseason FALSE --update_pbp TRUE
           - name: Push updated files
